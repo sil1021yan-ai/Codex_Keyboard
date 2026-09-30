@@ -1,0 +1,8 @@
+flowchart TD
+    A["按住 S2 说话"] --> B["16 kHz 单声道 PCM16"]
+    B --> C["UDP 分帧和 HMAC 认证<br/>边说边传，无额外上行内容加密"]
+    C --> D["松开后 Host 调用云端 ASR"]
+    D --> E["识别文本进入绑定任务 FIFO"]
+    E --> F["轮到时经 stdin 交给 codex exec resume"]
+    F --> G["观察到 task_started"]
+    G --> H["更新第五灯运行数"]

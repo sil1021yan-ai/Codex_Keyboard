@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#F3F5F3"/>
+  <g id="content" font-family="Arial, Arial Unicode MS, Microsoft YaHei, sans-serif" fill="#19211F">
+    <text x="64" y="54" font-size="15" fill="#1E9668">原理 5 / 10 · 认证与加密</text>
+    <text x="64" y="108" font-size="38" font-weight="bold">认证检查身份，加密隐藏内容</text>
+    <text x="64" y="152" font-size="22" fill="#5D6864">两者解决不同问题。仅有 HMAC 的报文，不应被称为密文。</text>
+    <path d="M640 210 V572" stroke="#CBD2CE" stroke-width="2"/>
+    <use data-icon="phosphor-duotone/shield-check" x="84" y="218" width="76" height="76" fill="#2D7D9A"/>
+    <text x="84" y="351" font-size="28" font-weight="bold">HMAC-SHA256</text>
+    <text x="84" y="403" font-size="24">检查来源和数据是否被改动</text>
+    <text x="84" y="459" font-size="22">用于上行 PCM、控制与状态报文。</text>
+    <text x="84" y="501" font-size="22">认证通过后，仍需检查会话和顺序。</text>
+    <text x="84" y="543" font-size="22" fill="#2D7D9A">不负责隐藏上行录音内容。</text>
+    <use data-icon="phosphor-duotone/lock-key" x="706" y="218" width="76" height="76" fill="#1E9668"/>
+    <text x="706" y="351" font-size="28" font-weight="bold">AES-256-GCM</text>
+    <text x="706" y="403" font-size="24">加密并校验音频内容</text>
+    <text x="706" y="459" font-size="22">用于下行音频与本地密文缓存。</text>
+    <text x="706" y="501" font-size="22">下行解密成功后，也要核对播放身份。</text>
+    <text x="706" y="543" font-size="22" fill="#1E9668">局域网直连不替代这些检查。</text>
+    <path d="M64 598 H1216" stroke="#CBD2CE" stroke-width="2"/>
+    <text x="64" y="638" font-size="22" fill="#5D6864">设备通信密钥与 Mac 缓存密钥分开保存。公开课不要展示密钥、录音或真实任务内容。</text>
+    <text x="64" y="690" font-size="12" fill="#5D6864">26 / 47</text>
+  </g>
+</svg>

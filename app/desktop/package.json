@@ -1,0 +1,19 @@
+{
+  "name": "@easy-codex/desktop-ui",
+  "private": true,
+  "version": "0.1.14",
+  "type": "module",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "node scripts/verify-assets.mjs",
+    "bundle:mac": "tauri build --bundles app --no-sign",
+    "bundle:windows": "cargo build --manifest-path ../../../windows-host/Cargo.toml --release && tauri build --bundles nsis --no-sign",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "2.11.4",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
+  }
+}

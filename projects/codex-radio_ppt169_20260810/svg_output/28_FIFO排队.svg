@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#F3F5F3"/>
+  <g id="content" font-family="Arial, Arial Unicode MS, Microsoft YaHei, sans-serif" fill="#19211F">
+    <text x="64" y="54" font-size="15" fill="#1E9668">原理 7 / 10 · FIFO 与并行</text>
+    <text x="64" y="108" font-size="38" font-weight="bold">一个任务排一队，最多四个任务同时跑</text>
+    <text x="64" y="152" font-size="22" fill="#5D6864">队列按任务划分；两个槽绑定同一个任务，也不会让这个任务并发执行。</text>
+    <text x="250" y="222" font-size="20" fill="#5D6864">正在执行</text>
+    <text x="544" y="222" font-size="20" fill="#5D6864">随后执行</text>
+    <text x="814" y="222" font-size="20" fill="#5D6864">再下一条</text>
+    <g font-size="24">
+      <text x="64" y="297">任务 1</text>
+      <text x="64" y="377">任务 2</text>
+      <text x="64" y="457">任务 3</text>
+      <text x="64" y="537">任务 4</text>
+    </g>
+    <rect x="216" y="254" width="240" height="64" rx="6" fill="#1E9668"/>
+    <rect x="502" y="254" width="240" height="64" rx="6" fill="#FFFFFF" stroke="#CBD2CE"/>
+    <rect x="788" y="254" width="240" height="64" rx="6" fill="#FFFFFF" stroke="#CBD2CE"/>
+    <rect x="216" y="414" width="240" height="64" rx="6" fill="#2D7D9A"/>
+    <rect x="216" y="494" width="240" height="64" rx="6" fill="#1E9668"/>
+    <rect x="502" y="494" width="240" height="64" rx="6" fill="#FFFFFF" stroke="#CBD2CE"/>
+    <g font-size="24" text-anchor="middle">
+      <text x="336" y="295" fill="#FFFFFF">要求 A</text>
+      <text x="622" y="295">要求 B</text>
+      <text x="908" y="295">要求 C</text>
+      <text x="336" y="455" fill="#FFFFFF">要求 A</text>
+      <text x="336" y="535" fill="#FFFFFF">要求 A</text>
+      <text x="622" y="535">要求 B</text>
+    </g>
+    <text x="265" y="377" font-size="24" fill="#5D6864">空闲</text>
+    <path d="M64 597 H1216" stroke="#CBD2CE" stroke-width="2"/>
+    <circle cx="85" cy="642" r="15" fill="#7A4DB3"/>
+    <text x="120" y="651" font-size="24">示例：3 个任务运行，第五灯为紫色；排队数量不算运行数量。</text>
+    <text x="64" y="690" font-size="12" fill="#5D6864">28 / 47</text>
+  </g>
+</svg>

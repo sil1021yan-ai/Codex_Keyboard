@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Codex Keyboard</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./main.js"></script>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="titlebar">
+        <div>
+          <p class="eyebrow">EASYINPUT AI · WINDOWS</p>
+          <h1>Codex Keyboard <span class="brand-mark">●</span></h1>
+          <p class="title-subtitle">你的语音键盘控制中心</p>
+        </div>
+        <div class="title-actions">
+          <span class="connection-pill"><span class="connection-pulse"></span><span id="header-connection-label">连接检查中</span></span>
+          <button id="refresh" class="icon-button" type="button" aria-label="刷新 Host 状态" title="刷新">
+          <svg
+            aria-hidden="true"
+            data-icon-source="lucide:refresh-cw"
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+          >
+            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+            <path d="M21 3v5h-5" />
+            <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+            <path d="M8 16H3v5" />
+          </svg>
+          </button>
+        </div>
+      </header>
+
+      <section id="status-band" class="status-band checking" aria-live="polite" hidden>
+        <span id="status-dot" class="status-dot checking"></span>
+        <div>
+          <p id="status-title" class="status-title">正在连接 Host</p>
+          <p id="status-detail" class="status-detail">等待本地 health socket</p>
+          <div id="status-checks" class="status-checks" aria-label="设备状态检查"></div>
+        </div>
+      </section>
+
+      <div class="app-layout">
+      <aside class="sidebar" aria-label="主导航">
+        <p class="sidebar-label">工作区</p>
+        <nav class="view-tabs" role="tablist" aria-label="功能区域">
+        <button id="tab-voice" class="view-tab active" role="tab" type="button" tabindex="0" data-view="voice" aria-controls="view-voice" aria-selected="true"><span class="nav-icon">⌂</span><span>总览</span><small>设备与槽位</small></button>
+        <button id="tab-records" class="view-tab" role="tab" type="button" tabindex="-1" data-view="records" aria-controls="view-records" aria-selected="false"><span class="nav-icon">≡</span><span>任务记录</span><small>语音与回复</small></button>
+        <button id="tab-binding" class="view-tab" role="tab" type="button" tabindex="-1" data-view="binding" aria-controls="view-binding" aria-selected="false"><span class="nav-icon">↔</span><span>任务绑定</span><small>S1～S4 连接</small></button>
+        <button id="tab-diagnostics" class="view-tab" role="tab" type="button" tabindex="-1" data-view="diagnostics" aria-controls="view-diagnostics" aria-selected="false">诊断</button>
+        <button id="tab-settings" class="view-tab" role="tab" type="button" tabindex="-1" data-view="settings" aria-controls="view-settings" aria-selected="false"><span class="nav-icon">⚙</span><span>设置</span><small>连接与灯光</small></button>
+        </nav>
+        <div class="sidebar-device">
+          <div class="sidebar-device-heading"><span class="device-orb"></span><strong>EasyInput AI</strong></div>
+          <p id="sidebar-device-state">正在读取设备状态</p>
+          <span class="sidebar-wifi">● 本地网络</span>
+        </div>
+      </aside>
+
+      <div class="main-content">
+
+      <section id="view-records" class="view-panel records-section" role="tabpanel" aria-labelledby="tab-records">
+        <div class="records-heading">
+          <div>
+            <h2 id="records-title">录音与任务</h2>
+            <p>一行是一条进入 Host 队列的文字；点击可查看去向与回复。</p>
+          </div>
+          <button id="records-refresh" class="secondary-button" type="button">刷新</button>
+        </div>
+        <div class="records-dispatcher">
+          <div>
+            <strong>新录音自动交给 Codex</strong>
+            <p id="dispatcher-status" role="status">正在检查自动执行状态…</p>
+          </div>
+          <button id="dispatcher-toggle" class="secondary-button" type="button" disabled>开启</button>
+        </div>
+        <p class="records-warning">只处理开启后新录的语音；已有“排队”记录不会自动补发。“排队”不等于 Codex 已收到。开启后，Codex 可能按语音指令修改对应项目文件。正常关闭桌面窗口会停止领取新录音，已领取任务会继续完成。</p>
+        <div id="records-counts" class="records-counts" aria-label="任务状态统计"></div>
+        <div class="records-filters">
+          <label>槽位
+            <select id="records-slot"><option value="all">全部槽位</option><option value="1">槽 1</option><option value="2">槽 2</option><option value="3">槽 3</option><option value="4">槽 4</option></select>
+          </label>
+          <label>状态
+            <select id="records-status"><option value="all">全部状态</option><option value="queued">排队</option><option value="running">运行中</option><option value="completed">已完成</option><option value="failed">失败</option></select>
+          </label>
+          <span id="records-total" class="records-total"></span>
+        </div>
+        <p id="records-message" class="records-message" role="status">正在读取真实任务记录…</p>
+        <p id="record-action-message" class="record-action-message" role="status" hidden></p>
+        <div id="records-list" class="records-list"></div>
+        <div class="records-pager">
+          <button id="records-prev" class="secondary-button" type="button">上一页</button>
+          <span id="records-page">第 1 / 1 页</span>
+          <button id="records-next" class="secondary-button" type="button">下一页</button>
+        </div>
+        <p class="records-footnote">旧记录未保存输入来源；“入队时间”不是按键开始录音的时间。展开当前绑定的录音，可先修正识别文字，再确认只执行这一条；只有明确的接手前写入冲突才提供一次重试。排队记录可以删除；长时间无响应的运行中记录可以停止并标记失败，已完成和失败记录不会删除。</p>
+      </section>
+
+      <div id="view-diagnostics" class="view-panel" role="tabpanel" aria-labelledby="tab-diagnostics" hidden>
+      <section class="self-check-section" aria-labelledby="self-check-title">
+        <div class="self-check-heading">
+          <div>
+            <p class="eyebrow">遇到问题时先看这里</p>
+            <h2 id="self-check-title">设备与语音自检</h2>
+            <p id="self-check-summary" class="self-check-summary" aria-live="polite">点击“立即自检”，生成一份可以发给 AI 的报告。</p>
+          </div>
+          <div class="self-check-actions">
+            <button id="run-self-check" class="primary-button" type="button">立即自检</button>
+            <button id="copy-self-check" class="secondary-button" type="button" disabled>复制报告</button>
+          </div>
+        </div>
+        <div id="self-check-results" class="self-check-results" aria-live="polite"></div>
+        <label class="self-check-report-label" for="self-check-report">可复制的诊断报告</label>
+        <textarea id="self-check-report" class="self-check-report" readonly placeholder="自检完成后，报告会显示在这里。"></textarea>
+        <p id="self-check-copy-status" class="self-check-copy-status" role="status">报告不会包含 Wi‑Fi 密码、API Key、设备密钥、任务编号或语音内容。</p>
+      </section>
+      <section class="device-log-section" aria-labelledby="device-log-title">
+        <div class="device-log-heading">
+          <div>
+            <p class="eyebrow">不用再口述猜测</p>
+            <h2 id="device-log-title">开发板实时日志</h2>
+            <p id="device-log-summary" class="device-log-summary" aria-live="polite">正在读取 Host 观察到的开发板事件…</p>
+          </div>
+          <div class="device-log-actions">
+            <button id="refresh-device-log" class="primary-button" type="button">刷新日志</button>
+            <button id="copy-device-log" class="secondary-button" type="button" disabled>复制给 AI</button>
+          </div>
+        </div>
+        <div id="device-log-metrics" class="device-log-metrics" aria-label="开发板链路指标"></div>
+        <ol id="device-log-events" class="device-log-events" aria-live="polite"></ol>
+        <label class="self-check-report-label" for="device-log-report">可复制的事件报告</label>
+        <textarea id="device-log-report" class="self-check-report device-log-report" readonly placeholder="读取成功后，这里会显示脱敏事件报告。"></textarea>
+        <p id="device-log-copy-status" class="self-check-copy-status" role="status">显示的是 Host 通过认证网络链路观察到的事件；不包含密码、密钥、任务 UUID、语音内容或完整转写。</p>
+      </section>
+      </div>
+
+      <div id="view-settings" class="view-panel" role="tabpanel" aria-labelledby="tab-settings" hidden>
+      <section class="setup-section" aria-labelledby="setup-title">
+        <div class="section-heading">
+          <h2 id="setup-title">第一次使用设置</h2>
+          <div class="setup-heading-actions">
+            <span class="setup-hint">只需设置一次</span>
+            <button id="setup-toggle" class="setup-toggle" type="button" aria-expanded="true">收起设置</button>
+          </div>
+        </div>
+        <div id="setup-content" class="setup-content">
+          <div class="setup-grid">
+          <article class="setup-card">
+            <div class="setup-card-heading">
+              <div>
+                <p class="setup-step">第 1 步</p>
+                <h3>连接 Wi‑Fi</h3>
+              </div>
+              <span id="wifi-state" class="setup-state">等待设置</span>
+            </div>
+            <p class="setup-description">开发板只连接 2.4GHz Wi‑Fi。请先把开发板插上 USB。</p>
+            <div class="setup-actions">
+              <button id="wifi-scan" class="secondary-button" type="button">扫描 Wi‑Fi</button>
+              <input id="wifi-ssid" class="setup-input" type="text" maxlength="32" placeholder="选择或填写 Wi‑Fi 名称" autocomplete="off" list="wifi-options" />
+              <datalist id="wifi-options"></datalist>
+            </div>
+            <input id="wifi-password" class="setup-input full-width" type="password" maxlength="64" placeholder="填写 Wi‑Fi 密码" autocomplete="off" />
+            <button id="wifi-provision" class="primary-button" type="button">通过 USB 写入开发板</button>
+            <p id="wifi-message" class="setup-message" aria-live="polite">尚未开始配置</p>
+          </article>
+
+          <article class="setup-card">
+            <div class="setup-card-heading">
+              <div>
+                <p class="setup-step">第 2 步</p>
+                <h3>配置 DashScope</h3>
+              </div>
+              <span id="key-state" class="setup-state">未配置</span>
+            </div>
+            <p class="setup-description">API Key 只会加密保存在这台电脑上，页面和日志都不会显示完整内容。</p>
+            <input id="api-key" class="setup-input full-width" type="password" placeholder="粘贴 DashScope API Key" autocomplete="off" />
+            <button id="api-key-save" class="primary-button" type="button">加密保存 API Key</button>
+            <button id="connect-device" class="secondary-button full-width" type="button">配对并启动语音服务</button>
+            <p id="setup-message" class="setup-message" aria-live="polite">尚未配置 API Key</p>
+          </article>
+          </div>
+          <article class="setup-card led-config-card">
+            <div class="setup-card-heading">
+              <div><p class="setup-step">第 3 步</p><h3>灯光自定义</h3></div>
+              <span id="led-config-state" class="setup-state">读取中</span>
+            </div>
+            <p class="setup-description">前四颗是“未播放总结”信箱灯，第五颗显示正在运行的不同任务数。保存后 Host 会自动下发到开发板；开发板重启后重新打开桌面端即可恢复。</p>
+            <div class="led-config-grid">
+              <div>
+                <h4>信箱灯颜色</h4>
+                <div id="mailbox-led-colors" class="led-color-list"></div>
+                <label>亮度级数
+                  <select id="mailbox-level-count"><option value="4">4 级（差异明显）</option><option value="8">8 级</option><option value="16">16 级</option></select>
+                </label>
+                <div id="mailbox-levels" class="led-level-list"></div>
+              </div>
+              <div>
+                <h4>第五灯：运行任务数</h4>
+                <div id="task-led-config" class="task-led-list"></div>
+              </div>
+            </div>
+            <div class="setup-actions">
+              <button id="led-config-reset" class="secondary-button" type="button">恢复默认</button>
+              <button id="led-config-save" class="primary-button" type="button">保存灯光设置</button>
+            </div>
+            <p id="led-config-message" class="setup-message" aria-live="polite">灯光配置只修改颜色和亮度，不会修改按键功能。</p>
+          </article>
+          <p class="setup-footnote">提示：电脑用网线也可以，只要电脑和开发板连接的是同一个路由器。</p>
+        </div>
+      </section>
+      </div>
+
+      <div id="view-binding" class="view-panel" role="tabpanel" aria-labelledby="tab-binding" hidden>
+      <section class="binding-section settings-binding-section" aria-labelledby="binding-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">CODEX CONNECTION</p>
+            <h2 id="binding-title">四槽任务绑定</h2>
+            <p class="section-description">在这里设置 S1～S4 分别交给哪个本地 Codex 任务，也可以手动输入任务 ID。</p>
+          </div>
+          <span id="task-count" class="task-count">-- 个任务</span>
+        </div>
+        <div id="slots" class="slots" aria-live="polite"></div>
+        <p id="slots-empty-message" class="slots-empty-message">正在读取 S1～S4 槽位；连接 Host 后会显示完整绑定控件。</p>
+      </section>
+      </div>
+
+      <div id="view-voice" class="view-panel" role="tabpanel" aria-labelledby="tab-voice" hidden>
+      <section class="overview-hero">
+        <div>
+          <p class="eyebrow">CONTROL CENTER</p>
+          <h2>今天也可以开始工作了</h2>
+          <p>按下 S1～S4 录音，回复完成后用 S5～S8 播放。</p>
+        </div>
+        <div class="overview-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </section>
+      <section class="overview-actions" aria-label="开始使用">
+        <div class="overview-action-main">
+          <div class="action-icon">↗</div>
+          <div>
+            <p class="eyebrow">READY TO USE</p>
+            <h3>准备好后，从这里开始</h3>
+            <p id="overview-setup-status">先确认开发板已开机，再启动语音服务。</p>
+          </div>
+          <button id="overview-connect-device" class="primary-button" type="button">配对并启动语音服务</button>
+        </div>
+        <div class="overview-dispatcher">
+          <div>
+            <strong>自动交给 Codex</strong>
+            <p id="overview-dispatcher-status">开启后，新录音会自动发送给对应的 Codex 任务。</p>
+          </div>
+          <button id="overview-dispatcher-toggle" class="secondary-button" type="button" disabled>检查中…</button>
+        </div>
+      </section>
+      <section class="overview-metrics" aria-label="当前概况">
+        <article class="metric-card"><span class="metric-label">设备状态</span><strong id="overview-device-value">检查中</strong><small id="overview-device-detail">等待 Host 状态</small></article>
+        <article class="metric-card"><span class="metric-label">语音服务</span><strong id="overview-service-value">检查中</strong><small>ASR · TTS</small></article>
+        <article class="metric-card"><span class="metric-label">运行中的任务</span><strong id="overview-running-value">—</strong><small>不同任务并行数</small></article>
+        <article class="metric-card accent"><span class="metric-label">待播放回复</span><strong id="overview-playback-value">—</strong><small>可用 S5～S8 播放</small></article>
+      </section>
+      <section class="overview-led-card" aria-label="五颗状态灯">
+        <div class="overview-led-heading">
+          <div>
+            <p class="eyebrow">DEVICE LIGHTS</p>
+            <h3>开发板状态灯</h3>
+          </div>
+          <span id="overview-led-summary">等待设备状态</span>
+        </div>
+        <div class="overview-led-strip">
+          <div class="overview-led-item"><span id="overview-led-1" class="overview-led-dot idle"></span><strong>S1</strong><small>待播放</small></div>
+          <div class="overview-led-item"><span id="overview-led-2" class="overview-led-dot idle"></span><strong>S2</strong><small>待播放</small></div>
+          <div class="overview-led-item"><span id="overview-led-3" class="overview-led-dot idle"></span><strong>S3</strong><small>待播放</small></div>
+          <div class="overview-led-item"><span id="overview-led-4" class="overview-led-dot idle"></span><strong>S4</strong><small>待播放</small></div>
+          <div class="overview-led-item task-led"><span id="overview-led-5" class="overview-led-dot idle"></span><strong>运行</strong><small id="overview-led-5-label">0 个任务</small></div>
+        </div>
+      </section>
+      <section class="provider-band" aria-labelledby="provider-title">
+        <div class="provider-heading">
+          <span id="provider-dot" class="provider-dot"></span>
+          <h2 id="provider-title">DashScope</h2>
+          <span id="provider-state">检测中</span>
+        </div>
+        <dl class="provider-facts">
+          <div>
+            <dt>ASR</dt>
+            <dd id="asr-model">--</dd>
+          </div>
+          <div>
+            <dt>TTS</dt>
+            <dd id="tts-model">--</dd>
+          </div>
+          <div>
+            <dt>音色</dt>
+            <dd id="tts-voice">--</dd>
+          </div>
+        </dl>
+      </section>
+
+      <dl class="facts">
+        <div class="fact-row">
+          <dt>Host</dt>
+          <dd>
+            <span id="host-version">--</span> · PID
+            <span id="host-pid">--</span>
+          </dd>
+        </div>
+        <div class="fact-row">
+          <dt>本地状态</dt>
+          <dd>
+            <span id="host-socket">run/host.sock</span> · DB
+            <span id="database-schema">--</span>
+          </dd>
+        </div>
+      </dl>
+      </div>
+
+      </div>
+      </div>
+
+      <footer>
+        <span id="last-updated">尚未收到状态</span>
+        <span>关闭窗口不会停止 Host</span>
+      </footer>
+    </main>
+
+    <template id="slot-template">
+      <div class="slot-row">
+        <div class="key-pair" aria-hidden="true">
+          <kbd class="talk-key"></kbd>
+          <kbd class="play-key"></kbd>
+        </div>
+        <div class="slot-content">
+          <label class="slot-label"></label>
+          <select class="task-select" aria-label=""></select>
+          <div class="manual-bind">
+            <input class="manual-task-id" type="text" maxlength="36" placeholder="手动输入本地任务 ID" aria-label="手动输入本地 Codex 任务 ID" />
+            <button class="manual-bind-button" type="button">绑定 ID</button>
+          </div>
+          <p class="slot-meta"></p>
+        </div>
+        <button
+          class="bind-button icon-button"
+          type="button"
+          aria-label=""
+          title="绑定"
+        >
+          <svg
+            aria-hidden="true"
+            data-icon-source="lucide:link"
+            viewBox="0 0 24 24"
+            width="17"
+            height="17"
+          >
+            <path
+              d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
+            />
+            <path
+              d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
+            />
+          </svg>
+        </button>
+      </div>
+    </template>
+  </body>
+</html>

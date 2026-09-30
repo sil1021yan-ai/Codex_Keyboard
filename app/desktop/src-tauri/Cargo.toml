@@ -1,0 +1,24 @@
+[package]
+name = "easy-codex-desktop"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+
+[target.'cfg(target_os = "macos")'.dependencies]
+easy-codex-host = { path = "../../host" }
+tauri.workspace = true
+
+[target.'cfg(target_os = "macos")'.build-dependencies]
+tauri-build.workspace = true
+
+[target.'cfg(target_os = "windows")'.dependencies]
+tauri.workspace = true
+
+[target.'cfg(target_os = "windows")'.build-dependencies]
+tauri-build.workspace = true

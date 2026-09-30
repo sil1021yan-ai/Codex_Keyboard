@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#F3F5F3"/>
+  <g id="content" font-family="Arial, Arial Unicode MS, Microsoft YaHei, sans-serif" fill="#19211F">
+    <text x="64" y="54" font-size="15" fill="#1E9668">原理 8 / 10 · 完成与音频就绪</text>
+    <text x="64" y="108" font-size="38" font-weight="bold">任务结束后，还要等总结和语音生成</text>
+    <text x="64" y="152" font-size="22" fill="#5D6864">task_complete 是触发点。进程退出、暂时没输出，都不能代替完成事件。</text>
+    <path d="M129 238 V551" stroke="#CBD2CE" stroke-width="3"/>
+    <circle cx="129" cy="257" r="24" fill="#2D7D9A"/>
+    <circle cx="129" cy="382" r="24" fill="#1E9668"/>
+    <circle cx="129" cy="507" r="24" fill="#1E9668"/>
+    <g font-size="22" text-anchor="middle" fill="#FFFFFF">
+      <text x="129" y="265">1</text>
+      <text x="129" y="390">2</text>
+      <text x="129" y="515">3</text>
+    </g>
+    <text x="185" y="266" font-size="28" font-weight="bold">观察到任务完成</text>
+    <text x="185" y="310" font-size="22">更新运行数，读取本次助手最终回复。</text>
+    <text x="185" y="391" font-size="28" font-weight="bold">Luna High 重新提炼</text>
+    <text x="185" y="435" font-size="22">带上旧未听内容；长度跟随信息量。</text>
+    <text x="185" y="516" font-size="28" font-weight="bold">TTS 和缓存发布完成</text>
+    <text x="185" y="560" font-size="22">对应信箱灯亮起，现在才有音频可听。</text>
+    <path d="M760 215 V566" stroke="#CBD2CE" stroke-width="2"/>
+    <text x="807" y="270" font-size="24" font-weight="bold">完成 ≠ 做成功</text>
+    <text x="807" y="315" font-size="22">最终回复也可能报告失败、</text>
+    <text x="807" y="351" font-size="22">限制或等待你处理的问题。</text>
+    <text x="807" y="433" font-size="24" font-weight="bold">没有固定 15 秒</text>
+    <text x="807" y="478" font-size="22">短确认不扩写，复杂结果多讲。</text>
+    <text x="807" y="514" font-size="22">当前单条音频上限为 150 秒。</text>
+    <text x="64" y="633" font-size="22" fill="#5D6864">灯没有亮时，按完成事件、总结、TTS、缓存发布的顺序查，不先认定是按键坏了。</text>
+    <text x="64" y="690" font-size="12" fill="#5D6864">29 / 47</text>
+  </g>
+</svg>

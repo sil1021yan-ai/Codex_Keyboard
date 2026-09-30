@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Codex Keyboard",
+  "version": "0.1.14",
+  "identifier": "com.larkspur.codex-keyboard",
+  "build": {
+    "frontendDist": "../ui"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "label": "main",
+        "title": "Codex Keyboard",
+        "width": 760,
+        "height": 800,
+        "minWidth": 660,
+        "minHeight": 700,
+        "resizable": true,
+        "fullscreen": false
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; script-src 'self'; style-src 'self'"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "resources": {
+      "../../../../windows-host/target/release/codex-keyboard-windows-host.exe": "resources/codex-keyboard-windows-host.exe"
+    },
+    "category": "Productivity",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  }
+}

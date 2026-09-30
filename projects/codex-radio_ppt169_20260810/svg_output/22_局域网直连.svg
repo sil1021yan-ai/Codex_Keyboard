@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#F3F5F3"/>
+  <g id="content" font-family="Arial, Arial Unicode MS, Microsoft YaHei, sans-serif" fill="#19211F">
+    <text x="64" y="54" font-size="15" fill="#1E9668">原理 1 / 10 · 网络</text>
+    <text x="64" y="108" font-size="38" font-weight="bold">本地直连，仍然需要云端模型</text>
+    <text x="64" y="151" font-size="22" fill="#5D6864">分清设备通信和模型调用，才不会误以为整套系统离线可用。</text>
+    <text x="64" y="222" font-size="22" font-weight="bold" fill="#1E9668">局域网</text>
+    <use data-icon="phosphor-duotone/keyboard" x="100" y="265" width="72" height="72" fill="#1E9668"/>
+    <text x="92" y="377" font-size="28" font-weight="bold">键盘</text>
+    <path d="M210 292 H570 M210 325 H570" stroke="#1E9668" stroke-width="3"/>
+    <path d="M557 284 L570 292 L557 300 M223 317 L210 325 L223 333" fill="none" stroke="#1E9668" stroke-width="3"/>
+    <text x="247" y="267" font-size="22">上行 PCM + HMAC 认证</text>
+    <text x="260" y="369" font-size="22">下行 AES-GCM 加密</text>
+    <use data-icon="phosphor-duotone/desktop" x="610" y="265" width="72" height="72" fill="#2D7D9A"/>
+    <text x="581" y="377" font-size="28" font-weight="bold">Mac Host</text>
+    <text x="596" y="415" font-size="20" fill="#5D6864">UDP 17333</text>
+    <path d="M755 206 V470" stroke="#CBD2CE" stroke-width="2" stroke-dasharray="6 6"/>
+    <text x="817" y="222" font-size="22" font-weight="bold" fill="#2D7D9A">互联网服务</text>
+    <path d="M710 310 H790" stroke="#2D7D9A" stroke-width="3"/>
+    <path d="M777 302 L790 310 L777 318" fill="none" stroke="#2D7D9A" stroke-width="3"/>
+    <text x="817" y="290" font-size="24">录音 → DashScope ASR</text>
+    <text x="817" y="343" font-size="24">任务与总结 → Codex</text>
+    <text x="817" y="396" font-size="24">总结文本 → DashScope TTS</text>
+    <path d="M64 508 H1216" stroke="#CBD2CE" stroke-width="2"/>
+    <text x="64" y="552" font-size="24" font-weight="bold">省掉的是公网中继，不是所有云端调用。</text>
+    <text x="64" y="598" font-size="22" fill="#5D6864">断外网后，新的识别、任务和合成会受影响。已有缓存需 Host 与局域网仍正常才能播放。</text>
+    <text x="64" y="638" font-size="20" fill="#5D6864">本项目沿用 UDP；WebSocket 也可用于局域网，不是单片机不能用。</text>
+    <text x="64" y="690" font-size="12" fill="#5D6864">22 / 47</text>
+  </g>
+</svg>

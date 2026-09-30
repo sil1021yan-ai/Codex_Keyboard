@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#F3F5F3"/>
+  <g id="content" font-family="Arial, Arial Unicode MS, Microsoft YaHei, sans-serif" fill="#19211F">
+    <text x="64" y="54" font-size="15" fill="#1E9668">原理 3 / 10 · Flash 与 NVS</text>
+    <text x="64" y="108" font-size="38" font-weight="bold">刷哪一段，保留哪一段</text>
+    <text x="64" y="151" font-size="22" fill="#5D6864">以本版 partitions.csv 为准。NVS 在应用之前，不在应用后面。</text>
+    <text x="80" y="217" font-size="20" fill="#5D6864">起始地址</text>
+    <text x="300" y="217" font-size="20" fill="#5D6864">内容</text>
+    <text x="668" y="217" font-size="20" fill="#5D6864">本次三段烧录</text>
+    <path d="M64 235 H810 M64 287 H810 M64 339 H810 M64 391 H810 M64 443 H810 M64 495 H810 M64 547 H810 M64 599 H810" stroke="#CBD2CE"/>
+    <g id="content" font-family="Consolas, Courier New, monospace" font-size="22">
+      <text x="80" y="269">0x0000</text>
+      <text x="80" y="321">0x8000</text>
+      <text x="80" y="373">0x9000</text>
+      <text x="80" y="425">0xF000</text>
+      <text x="80" y="477">0x10000</text>
+      <text x="80" y="529">0x310000</text>
+      <text x="80" y="581">0x3A0000</text>
+    </g>
+    <g font-size="22">
+      <text x="300" y="269">bootloader 引导</text>
+      <text x="300" y="321">分区表</text>
+      <text x="300" y="373">NVS 配置</text>
+      <text x="300" y="425">PHY 数据</text>
+      <text x="300" y="477">应用程序（3 MB）</text>
+      <text x="300" y="529">sound_a 音效区</text>
+      <text x="300" y="581">sound_b 音效区</text>
+      <text x="693" y="269" fill="#2D7D9A">写入</text>
+      <text x="693" y="321" fill="#2D7D9A">写入</text>
+      <text x="693" y="373" fill="#1E9668">保留</text>
+      <text x="693" y="425" fill="#1E9668">保留</text>
+      <text x="693" y="477" fill="#2D7D9A">写入</text>
+      <text x="693" y="529" fill="#1E9668">保留</text>
+      <text x="693" y="581" fill="#1E9668">保留</text>
+    </g>
+    <path d="M850 202 V598" stroke="#CBD2CE" stroke-width="2"/>
+    <use data-icon="phosphor-duotone/hard-drives" x="906" y="210" width="64" height="64" fill="#1E9668"/>
+    <text x="901" y="321" font-size="24" font-weight="bold">NVS 里保存什么</text>
+    <text x="901" y="362" font-size="22">Wi-Fi、Mac 端点、</text>
+    <text x="901" y="396" font-size="22">设备密钥、音量档位。</text>
+    <text x="901" y="474" font-size="24" font-weight="bold">音量播报在哪里</text>
+    <text x="901" y="515" font-size="22">十条提示音嵌入应用，</text>
+    <text x="901" y="549" font-size="22">不在独立音效区。</text>
+    <text x="64" y="647" font-size="20" fill="#D65C4A">不执行整片擦除。更换分区布局时，必须重新评估配置和音效的保留方式。</text>
+    <text x="64" y="690" font-size="12" fill="#5D6864">24 / 47 · 按地址顺序示意，非容量比例图</text>
+  </g>
+</svg>

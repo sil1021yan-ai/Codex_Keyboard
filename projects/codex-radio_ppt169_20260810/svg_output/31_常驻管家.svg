@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#F3F5F3"/>
+  <g id="content" font-family="Arial, Arial Unicode MS, Microsoft YaHei, sans-serif" fill="#19211F">
+    <text x="64" y="54" font-size="15" fill="#1E9668">原理 10 / 10 · 后台服务</text>
+    <text x="64" y="108" font-size="38" font-weight="bold">关掉 App 窗口，Host 继续工作</text>
+    <text x="64" y="152" font-size="22" fill="#5D6864">Host 是用户登录后运行的 LaunchAgent。桌面窗口不是后台服务本身。</text>
+    <use data-icon="phosphor-duotone/desktop" x="110" y="232" width="72" height="72" fill="#2D7D9A"/>
+    <text x="86" y="353" font-size="28" font-weight="bold">桌面 App</text>
+    <text x="86" y="398" font-size="22">选择并绑定任务</text>
+    <text x="86" y="434" font-size="22">查看队列与未听次数</text>
+    <path d="M309 281 H419 M858 281 H960" stroke="#CBD2CE" stroke-width="3"/>
+    <rect x="439" y="207" width="398" height="294" rx="6" fill="#19211F"/>
+    <use data-icon="phosphor-duotone/gear" x="485" y="237" width="56" height="56" fill="#F3F5F3"/>
+    <text x="485" y="345" font-size="28" font-weight="bold" fill="#F3F5F3">easy-codex-host</text>
+    <text x="485" y="395" font-size="22" fill="#F3F5F3">观察任务、调用模型</text>
+    <text x="485" y="435" font-size="22" fill="#F3F5F3">维护 SQLite 与音频缓存</text>
+    <use data-icon="phosphor-duotone/keyboard" x="1011" y="232" width="72" height="72" fill="#1E9668"/>
+    <text x="1000" y="353" font-size="28" font-weight="bold">键盘</text>
+    <text x="973" y="398" font-size="22">发送槽位动作</text>
+    <text x="973" y="434" font-size="22">显示灯光、播放声音</text>
+    <path d="M64 552 H1216" stroke="#CBD2CE" stroke-width="2"/>
+    <text x="64" y="597" font-size="24" font-weight="bold">Mac 睡眠、退出登录或断网，仍可能中断工作。</text>
+    <text x="64" y="638" font-size="22" fill="#5D6864">升级 Host 使用 launch-agent-upgrade；仅重启桌面 App 不会更换后台程序。</text>
+    <text x="64" y="690" font-size="12" fill="#5D6864">31 / 47</text>
+  </g>
+</svg>

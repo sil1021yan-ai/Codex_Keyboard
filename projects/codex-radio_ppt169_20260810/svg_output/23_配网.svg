@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#F3F5F3"/>
+  <g id="content" font-family="Arial, Arial Unicode MS, Microsoft YaHei, sans-serif" fill="#19211F">
+    <text x="64" y="54" font-size="15" fill="#1E9668">原理 2 / 10 · 配网</text>
+    <text x="64" y="108" font-size="38" font-weight="bold">先保存连接信息，再检查能否通信</text>
+    <text x="64" y="152" font-size="22" fill="#5D6864">本课的 provision-lan 命令走 USB HID，不会失败后自动改走蓝牙。</text>
+    <use data-icon="phosphor-duotone/desktop" x="98" y="214" width="64" height="64" fill="#2D7D9A"/>
+    <text x="192" y="248" font-size="28" font-weight="bold">Mac 下发配置</text>
+    <text x="192" y="289" font-size="22">SSID、密码、Mac IPv4、UDP 端口、设备密钥</text>
+    <path d="M130 305 V363" stroke="#CBD2CE" stroke-width="3"/>
+    <use data-icon="phosphor-duotone/database" x="98" y="376" width="64" height="64" fill="#1E9668"/>
+    <text x="192" y="409" font-size="28" font-weight="bold">键盘保存到 NVS</text>
+    <text x="192" y="450" font-size="22">收到精确保存确认，命令才报告 provisioned</text>
+    <path d="M130 469 V527" stroke="#CBD2CE" stroke-width="3"/>
+    <use data-icon="phosphor-duotone/wifi-high" x="98" y="540" width="64" height="64" fill="#2D7D9A"/>
+    <text x="192" y="574" font-size="28" font-weight="bold">验证局域网链路</text>
+    <text x="192" y="615" font-size="22">检查心跳、任务状态变化，再做一次语音输入</text>
+    <path d="M792 211 V618" stroke="#CBD2CE" stroke-width="2"/>
+    <text x="839" y="246" font-size="24" font-weight="bold">三件要留意的事</text>
+    <text x="839" y="313" font-size="22">密码从标准输入读取</text>
+    <text x="839" y="350" font-size="20" fill="#5D6864">不写入命令参数、截图或日志</text>
+    <text x="839" y="422" font-size="22">Mac 地址可能变化</text>
+    <text x="839" y="459" font-size="20" fill="#5D6864">更换网络后核对保存的端点</text>
+    <text x="839" y="531" font-size="22">保存成功不等于连通</text>
+    <text x="839" y="568" font-size="20" fill="#5D6864">AP 隔离和防火墙仍可能阻断</text>
+    <text x="64" y="690" font-size="12" fill="#5D6864">23 / 47</text>
+  </g>
+</svg>
